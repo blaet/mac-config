@@ -3,6 +3,29 @@
 # Ensure any fault stops script execution
 set -e
 
+# This will get our current console user regardless of whether the script if run with sudo or not
+logged_in_user=$(python -c "import SystemConfiguration, sys; sys.stdout.write(SystemConfiguration.SCDynamicStoreCopyConsoleUser(None, None, None)[0]);")
+
+# Blanket sudo line
+sudo_blanket_file="/etc/sudoers.d/mac-config-blanket"
+sudo_blanket_contents="${logged_in_user} ALL= (ALL) NOPASSWD: ALL"
+
+# Enable blanket passwordless sudo rights for logged in user
+function enable_blanket_sudo_rights {
+  echo "$sudo_blanket_contents" > $sudo_blanket_file
+}
+
+# Revoke blanket sudo rights
+function revoke_blanket_sudo_rights {
+  rm -rf "$sudo_blanket_file"
+}
+
+# Cleanup when script exists (unexpectedly)
+function cleanup {
+  revoke_blanket_sudo_rights()
+}
+trap cleanup EXIT
+
 # Check if the mas-cli exists and look up the latest release to install
 # mas-cli recommends using brew, but the ansible playbook will install brew for us
 if [ ! -f /usr/local/bin/mas ]; then

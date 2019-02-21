@@ -11,17 +11,17 @@ sudo_blanket_file="/etc/sudoers.d/mac-config-blanket"
 sudo_blanket_contents="${logged_in_user} ALL= (ALL) NOPASSWD: ALL"
 
 # Enable blanket passwordless sudo rights for logged in user
-function enable_blanket_sudo_rights {
+function enable_blanket_sudo_rights () {
   echo "$sudo_blanket_contents" > $sudo_blanket_file
 }
 
 # Revoke blanket sudo rights
-function revoke_blanket_sudo_rights {
+function revoke_blanket_sudo_rights () {
   rm -rf "$sudo_blanket_file"
 }
 
 # Cleanup when script exists (unexpectedly)
-function cleanup {
+function cleanup () {
   revoke_blanket_sudo_rights
 }
 trap cleanup EXIT

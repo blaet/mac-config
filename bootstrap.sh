@@ -12,16 +12,26 @@ sudo_blanket_contents="${logged_in_user} ALL= (ALL) NOPASSWD: ALL"
 
 # Enable blanket passwordless sudo rights for logged in user
 function enable_blanket_sudo_rights () {
+  echo "Enabling blanket sudo right"
   echo "$sudo_blanket_contents" | sudo tee "$sudo_blanket_file" > /dev/null
 }
 
 # Revoke blanket sudo rights
 function revoke_blanket_sudo_rights () {
+  echo "Revoking blanket sudo right"
   sudo rm -rf "$sudo_blanket_file"
+}
+
+# Remove possible temp files
+function remove_temp_files () {
+  echo "Removing temp files"
+  rm -rf mas*
+  rm -rf mac-config*
 }
 
 # Cleanup when script exists (unexpectedly)
 function cleanup () {
+  remove_stray_files
   revoke_blanket_sudo_rights
 }
 trap cleanup EXIT

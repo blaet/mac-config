@@ -47,7 +47,7 @@ if [ ! -f /usr/local/bin/mas ]; then
   echo "Downloading and installing mas-cli from Github"
   curl -sL "$mas_latest_release" -o mas.zip > /dev/null
   sudo unzip mas.zip > /dev/null
-  sudo mv mas.xcarchive/ /usr/local/bin/mas
+  sudo mv mas.xcarchive /usr/local/bin/mas
   rm -rf mas*
 fi
 

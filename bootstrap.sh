@@ -12,7 +12,7 @@ sudo_blanket_contents="${logged_in_user} ALL= (ALL) NOPASSWD: ALL"
 
 # Enable blanket passwordless sudo rights for logged in user
 function enable_blanket_sudo_rights () {
-  echo "Enabling blanket sudo right"
+  echo "Enabling blanket sudo rights"
   echo "$sudo_blanket_contents" | sudo tee "$sudo_blanket_file" > /dev/null
 }
 
@@ -31,7 +31,7 @@ function remove_temp_files () {
 
 # Cleanup when script exists (unexpectedly)
 function cleanup () {
-  remove_stray_files
+  remove_temp_files
   revoke_blanket_sudo_rights
 }
 trap cleanup EXIT

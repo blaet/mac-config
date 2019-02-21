@@ -7,10 +7,10 @@ if [ ! -d "/Applications/Xcode.app" ]; then
     echo "Xcode is not currently installed. We need Xcode for git and gcc"
     echo "Getting ready to install from the Mac App Store using mas-cli"
     signed_in=$([[ $(mas account) == *"Not signed in"* ]] && echo "No" || echo "Yes")
-    if [ $signed_in == "No" ]; then
+    if [ "$signed_in" == "No" ]; then
         echo "You are not currently signed in to the Mac App Store. Let's get you signed in!"
-        read -p 'Apple ID Email: ' apple_id
-        mas signin $apple_id
+        read -rp 'Apple ID Email: ' apple_id
+        mas signin "$apple_id"
     fi
     bash scripts/mas_install.sh Xcode
     /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -license accept

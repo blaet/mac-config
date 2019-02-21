@@ -22,9 +22,12 @@ function revoke_blanket_sudo_rights {
 
 # Cleanup when script exists (unexpectedly)
 function cleanup {
-  revoke_blanket_sudo_rights()
+  revoke_blanket_sudo_rights
 }
 trap cleanup EXIT
+
+# Enable sudo rights
+enable_blanket_sudo_rights
 
 # Check if the mas-cli exists and look up the latest release to install
 # mas-cli recommends using brew, but the ansible playbook will install brew for us

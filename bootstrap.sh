@@ -42,7 +42,7 @@ if [ ! -f /usr/local/bin/mas ]; then
 fi
 
 MAC_CONFIG_URL=https://codeload.github.com/blaet/mac-config/zip/master
-MAC_CONFIG_DIR=/usr/local/MacConfig/
+MAC_CONFIG_DIR=/usr/local/MacConfig
 
 # Create MacConfig directory
 if [ ! -d "${MAC_CONFIG_DIR}" ]; then
@@ -53,7 +53,8 @@ fi
 # Download MacConfig files
 echo "Downloading MacConfig files"
 curl -sL $MAC_CONFIG_URL -o mac-config.zip > /dev/null
-sudo unzip mac-config.zip -d "${MAC_CONFIG_DIR}" > /dev/null
-rm mac-config.zip
+unzip mac-config.zip > /dev/null
+sudo mv mac-config "${MAC_CONFIG_DIR}"
+rm -rf mac-config*
 
 echo "Bootstrapping complete"

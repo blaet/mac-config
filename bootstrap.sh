@@ -35,8 +35,9 @@ if [ ! -f /usr/local/bin/mas ]; then
   echo "mas-cli was not found! Looking up latest version from Github releases"
   mas_latest_release=$(curl -s https://api.github.com/repos/mas-cli/mas/releases/latest | python -c "import sys, json; sys.stdout.write(json.load(sys.stdin)['assets'][1]['browser_download_url']);");
   echo "Downloading and installing mas-cli from Github"
-  curl -sL $mas_latest_release -o mas.zip > /dev/null
+  curl -sL "$mas_latest_release" -o mas.zip > /dev/null
   sudo unzip mas.zip -d /usr/local/bin/ > /dev/null
+  sudo mv /usr/local/bin/mas.xcarchive /usr/local/bin/mas
   rm mas.zip
 fi
 

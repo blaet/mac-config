@@ -36,13 +36,13 @@ if [ ! -f /usr/local/bin/mas ]; then
   mas_latest_release=$(curl -s https://api.github.com/repos/mas-cli/mas/releases/latest | python -c "import sys, json; sys.stdout.write(json.load(sys.stdin)['assets'][1]['browser_download_url']);");
   echo "Downloading and installing mas-cli from Github"
   curl -sL "$mas_latest_release" -o mas.zip > /dev/null
-  sudo unzip mas.zip -d /usr/local/bin/ > /dev/null
-  sudo mv /usr/local/bin/mas.xcarchive /usr/local/bin/mas
-  rm mas.zip
+  sudo unzip mas.zip > /dev/null
+  sudo mv mas.xcarchive/ /usr/local/bin/mas
+  rm -rf mas*
 fi
 
 MAC_CONFIG_URL=https://codeload.github.com/blaet/mac-config/zip/master
-MAC_CONFIG_DIR=/usr/local/MacConfig/
+MAC_CONFIG_DIR=/usr/local/MacConfig
 
 # Create MacConfig directory
 if [ ! -d "${MAC_CONFIG_DIR}" ]; then
@@ -54,7 +54,7 @@ fi
 echo "Downloading MacConfig files"
 curl -sL $MAC_CONFIG_URL -o mac-config.zip > /dev/null
 unzip mac-config.zip > /dev/null
-sudo mv mac-config-master/* "${MAC_CONFIG_DIR}"
+sudo cp -r mac-config-master/* "${MAC_CONFIG_DIR}/"
 rm -rf mac-config*
 
 echo "Bootstrapping complete"

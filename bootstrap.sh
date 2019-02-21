@@ -46,7 +46,7 @@ if [ ! -f /usr/local/bin/mas ]; then
   mas_latest_release=$(curl -s https://api.github.com/repos/mas-cli/mas/releases/latest | python -c "import sys, json; sys.stdout.write(json.load(sys.stdin)['assets'][1]['browser_download_url']);");
   echo "Downloading and installing mas-cli from Github"
   curl -sL "$mas_latest_release" -o mas.zip > /dev/null
-  sudo unzip mas.zip > /dev/null
+  unzip mas.zip > /dev/null
   sudo mv mas.xcarchive /usr/local/bin/mas
   rm -rf mas*
 fi

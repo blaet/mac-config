@@ -25,8 +25,8 @@ function revoke_blanket_sudo_rights () {
 # Remove possible temp files
 function remove_temp_files () {
   echo "Removing temp files"
-  rm -rf mas*
-  rm -rf mac-config*
+  rm -rf "mas*"
+  rm -rf "mac-config*"
 }
 
 # Cleanup when script exists (unexpectedly)
@@ -65,6 +65,6 @@ echo "Downloading MacConfig files"
 curl -sL $MAC_CONFIG_URL -o mac-config.zip > /dev/null
 unzip mac-config.zip > /dev/null
 sudo cp -r mac-config-master/* "${MAC_CONFIG_DIR}/"
-rm -rf mac-config*
+rm -rf "mac-config*"
 
 echo "Bootstrapping complete"

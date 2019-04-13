@@ -52,6 +52,17 @@ if [ ! -f /usr/local/bin/mas ]; then
   sudo installer -pkg mas.pkg -target /
   rm -rf "mas*"
 fi
+
+# Check logged in status
+signed_in=$([[ $(mas account) == *"Not signed in"* ]] && echo "No" || echo "Yes")
+if [ "$signed_in" == "No" ]; then
+    echo "You are not currently signed in to the Mac App Store. Let's get you signed in!"
+    # read -rp 'Apple ID Email: ' apple_id
+    # mas signin "$apple_id"
+    echo "         Unfortunately, this cannot be compeleted automatically."
+    echo "MANUAL - Please log in manually from the App Store now."
+    echo "         After that is complete, run this script again."
+    exit 1
 fi
 
 MAC_CONFIG_URL=https://codeload.github.com/blaet/mac-config/zip/master

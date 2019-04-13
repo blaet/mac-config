@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure any fault stops script execution
-set -e
+set -ex
 
 # This will get our current console user regardless of whether the script if run with sudo or not
 logged_in_user=$(python -c "import SystemConfiguration, sys; sys.stdout.write(SystemConfiguration.SCDynamicStoreCopyConsoleUser(None, None, None)[0]);")

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure any fault stops script execution
-set -e
+set -ex
 
 if [ ! -d "/Applications/Xcode.app" ]; then
     echo "Xcode is not currently installed. We need Xcode for git and gcc"

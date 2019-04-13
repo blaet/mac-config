@@ -9,8 +9,12 @@ if [ ! -d "/Applications/Xcode.app" ]; then
     signed_in=$([[ $(mas account) == *"Not signed in"* ]] && echo "No" || echo "Yes")
     if [ "$signed_in" == "No" ]; then
         echo "You are not currently signed in to the Mac App Store. Let's get you signed in!"
-        read -rp 'Apple ID Email: ' apple_id
-        mas signin "$apple_id"
+        # read -rp 'Apple ID Email: ' apple_id
+        # mas signin "$apple_id"
+        echo "         Unfortunately, this cannot be compeleted automatically."
+        echo "MANUAL - Please log in manually from the App Store now."
+        echo "         After that is complete, run this script again."
+        exit 1
     fi
     bash scripts/mas_install.sh Xcode
     /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -license accept

@@ -43,12 +43,15 @@ enable_blanket_sudo_rights
 # mas-cli recommends using brew, but the ansible playbook will install brew for us
 if [ ! -f /usr/local/bin/mas ]; then
   echo "mas-cli was not found! Looking up latest version from Github releases"
-  mas_latest_release=$(curl -s https://api.github.com/repos/mas-cli/mas/releases/latest | python -c "import sys, json; sys.stdout.write(json.load(sys.stdin)['assets'][1]['browser_download_url']);");
-  echo "Downloading and installing mas-cli from Github"
-  curl -sL "$mas_latest_release" -o mas.zip > /dev/null
-  unzip mas.zip > /dev/null
-  sudo mv "$(pwd)/mas.xcarchive" "/usr/local/bin/mas"
-  rm -rf mas*
+  mas_latest_release=$(curl -s https://api.github.com/repos/mas-cli/mas/releases/latest | python -c "import sys, json; sys.stdout.write(json.load(sys.stdin)['assets'][0]['browser_download_url']);");
+  if [ ! -f mas.zip ]; then
+    echo "Downloading and installing mas-cli from Github"
+    curl -sL "$mas_latest_release" -o mas.pkg > /dev/null
+  fi
+  sudo mkdir -p /usr/local/bin
+  sudo installer -pkg mas.pkg -target /
+  rm -rf "mas*"
+fi
 fi
 
 MAC_CONFIG_URL=https://codeload.github.com/blaet/mac-config/zip/master

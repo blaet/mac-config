@@ -65,7 +65,7 @@ fi
 # Download MacConfig files
 echo "Downloading MacConfig files"
 curl -sL $MAC_CONFIG_URL -o mac-config.zip > /dev/null
-unzip mac-config.zip > /dev/null
+unzip -o mac-config.zip > /dev/null
 sudo cp -r mac-config-master/* "${MAC_CONFIG_DIR}/"
 rm -rf "mac-config*"
 

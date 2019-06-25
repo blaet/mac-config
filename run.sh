@@ -20,6 +20,11 @@ if [ ! -d "/Applications/Xcode.app" ]; then
     /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -license accept
 fi
 
+if [ ! -f /usr/local/bin/brew ]; then
+    echo "Homebrew was not found! Installing the latest version"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
 # Newly setup computers often don't have pip install.
 if [ ! -f /usr/local/bin/pip ]; then
     echo "Missing pip! Installing with easy_install"

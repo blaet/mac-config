@@ -67,7 +67,7 @@ echo "Downloading MacConfig files"
 curl -sL $MAC_CONFIG_URL -o mac-config.zip > /dev/null
 unzip mac-config.zip > /dev/null
 sudo cp -r mac-config-master/* "${MAC_CONFIG_DIR}/"
-rm -rf "mac-config*"
+rm -rf mac-config.zip mac-config-master
 
 # Run run.sh
 echo "Executing run.sh"

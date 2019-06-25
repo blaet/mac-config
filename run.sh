@@ -38,4 +38,9 @@ if [ ! -f /usr/local/bin/ansible ]; then
     brew install ansible
 fi
 
+if [ ! -f /usr/local/bin/stow ]; then
+    echo "Installing Stow"
+    brew install stow
+fi
+
 echo "Completed run.sh execution"

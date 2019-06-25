@@ -35,7 +35,7 @@ fi
 # 2.2 and that is not the current version install by `pip installed ansible`
 if [ ! -f /usr/local/bin/ansible ]; then
     echo "Installing Ansible 2.7"
-    sudo pip install git+git://github.com/ansible/ansible.git@stable-2.7
+    brew install ansible
 fi
 
 echo "Completed run.sh execution"

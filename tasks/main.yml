@@ -1,0 +1,5 @@
+---
+
+- name: Include macOS Tasks
+  include: macos.yml
+  when: ansible_os_family == "Darwin"

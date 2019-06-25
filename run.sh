@@ -43,4 +43,11 @@ if [ ! -f /usr/local/bin/stow ]; then
     brew install stow
 fi
 
+# This will get our current console user regardless of whether the script if run with sudo or not
+logged_in_user=$(python -c "import SystemConfiguration, sys; sys.stdout.write(SystemConfiguration.SCDynamicStoreCopyConsoleUser(None, None, None)[0]);")
+
+# Install ansible-galaxy roles and run main playbook
+# sudo -u "$logged_in_user" ansible-galaxy install -r requirements.yml
+sudo -u "$logged_in_user" ansible-playbook -i "localhost," --extra-vars "ansible_user=$logged_in_user" main.yml $@
+
 echo "Completed run.sh execution"

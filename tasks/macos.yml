@@ -25,9 +25,10 @@
 
 
 - name: Ensure standby mode behaves properly
-  shell: "pmset -a {{ item }}"
+  shell: pmset -a {{ item }}
   become: true
   with_items:
+    - destroyfvkeyonstandby 1
     - powernap 0
     - standby 0
     - standbydelayhigh 0

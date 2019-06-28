@@ -57,3 +57,8 @@
   shell: pkill -HUP socketfilterfw
   become: true
   when: socketfilterfw_configuration.changed
+
+
+- name: Disable auto-captive portal detection
+  shell: defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false
+  become: true

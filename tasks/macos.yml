@@ -62,3 +62,16 @@
 - name: Disable auto-captive portal detection
   shell: defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false
   become: true
+
+
+- name: Check if .curlrc exists
+  stat:
+    path: ~/.curlrc
+  register: curlrc_check
+
+
+- name: Secure CURL
+  copy:
+    src: files/curlrc
+    dest: ~/.curlrc
+  when: curlrc_check.stat.exists == False

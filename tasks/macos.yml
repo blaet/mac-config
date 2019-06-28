@@ -64,6 +64,11 @@
   become: true
 
 
+- name: Prevent new files being readable by group/other
+  shell: launchctl config user umask 077
+  become: true
+
+
 - name: Check if .curlrc exists
   stat:
     path: ~/.curlrc

@@ -34,3 +34,26 @@
     - standbydelayhigh 0
     - standbydelaylow 0
     - autopoweroff 0
+
+
+- name: Configure incoming Firewall
+  shell: /usr/libexec/ApplicationFirewall/socketfilterfw --{{ item.name }} {{ item.state }}
+  become: true
+  with_items:
+    - name: setglobalstate
+      state: on
+    - name: setloggingmode
+      state: on
+    - name: setstealthmode
+      state: on
+    - name: setallowsigned
+      state: off
+    - name: setallowsignedapp
+      state: off
+  register: socketfilterfw_configuration
+
+
+- name: Reload socketfilterfw
+  shell: pkill -HUP socketfilterfw
+  become: true
+  when: socketfilterfw_configuration.changed

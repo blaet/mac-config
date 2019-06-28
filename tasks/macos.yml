@@ -75,3 +75,7 @@
     src: files/curlrc
     dest: ~/.curlrc
   when: curlrc_check.stat.exists == False
+
+
+- name: Ensure files are shown with their full extentions
+  shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
